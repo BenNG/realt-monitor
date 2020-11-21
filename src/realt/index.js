@@ -1,8 +1,8 @@
 const { realTApi } = require('../tech/api/realt');
 const cheerio = require('cheerio');
 const { notif } = require('../tech/notification');
-const { own } = require('../../.env');
 const { STATUS, getProductsByStatus } = require('./utils');
+const { REALT_OWN_PRODUCTS } = require('./env');
 
 // to update
 
@@ -33,18 +33,24 @@ const monitorWebsite = async () => {
       const productsByStatus = getProductsByStatus($, productNodes);
 
       // tests
+
+      if (productNodes.length === 0) {
+        notif({ message: 'The market place is empty (update soon ?)' });
+        return;
+      }
+
       if (productNodes.length !== nbrOfProducts) {
         notif({ message: 'The number of products has changed' });
       }
 
       productsByStatus[STATUS.NEW].forEach((n) => {
-        if (!own.includes(n)) {
+        if (!REALT_OWN_PRODUCTS.includes(n)) {
           notif({ message: `There is a new product: ${n}` });
         }
       });
 
       productsByStatus[STATUS.COMING_SOON].forEach((n) => {
-        if (!own.includes(n)) {
+        if (!REALT_OWN_PRODUCTS.includes(n)) {
           notif({ message: `There is a coming soon product: ${n}` });
         }
       });
@@ -55,4 +61,4 @@ const monitorWebsite = async () => {
 };
 
 monitorWebsite();
-setInterval(monitorWebsite, 20 * 1000);
+// setInterval(monitorWebsite, 20 * 1000);

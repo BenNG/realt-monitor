@@ -11,9 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@humanwhocodes/env": "^2.1.2",
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "node-mailjet": "^3.3.1",
     "node-notifier": "^8.0.0",
     "play-sound": "^1.1.3",
     "prettier": "^2.1.2",
