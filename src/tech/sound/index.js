@@ -1,9 +1,12 @@
-const player = require('play-sound')();
+const path = require('path');
+var shell = require('shelljs');
 
 const play = () => {
-  player.play('./not.wav', (err) => {
-    if (err) console.log(`Could not play sound: ${err}`);
-  });
+  if (shell.which('mplayer')) {
+    if (shell.exec(`pwd && mplayer ${path.join(__dirname, 'not.mp3')}`).code !== 0) {
+      console.log('something wrong while playing notification');
+    }
+  }
 };
 
 module.exports = {

@@ -1,6 +1,5 @@
 const notifier = require('node-notifier');
 const { sendEmail } = require('../sendmail');
-
 const { play } = require('../sound');
 
 const websiteName = 'RealT';

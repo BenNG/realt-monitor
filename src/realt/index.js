@@ -35,7 +35,7 @@ const monitorWebsite = async () => {
       // tests
 
       if (productNodes.length === 0) {
-        notif({ message: 'The market place is empty (update soon ?)' });
+        notif({ message: 'The marketY place is empty (update soon ?)' });
         return;
       }
 
@@ -54,6 +54,11 @@ const monitorWebsite = async () => {
           notif({ message: `There is a coming soon product: ${n}` });
         }
       });
+      productsByStatus[STATUS.LIMITED].forEach((n) => {
+        if (!REALT_OWN_PRODUCTS.includes(n)) {
+          notif({ message: `There is a coming soon product: ${n}` });
+        }
+      });
     });
   } catch (e) {
     console.log('something wrong, ' + e);
@@ -61,4 +66,4 @@ const monitorWebsite = async () => {
 };
 
 monitorWebsite();
-// setInterval(monitorWebsite, 20 * 1000);
+setInterval(monitorWebsite, 20 * 1000);

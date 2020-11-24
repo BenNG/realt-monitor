@@ -4,6 +4,7 @@ const STATUS = {
   NEW: 'New!',
   SOLD_OUT: 'Sold Out',
   COMING_SOON: 'Coming Soon!',
+  LIMITED: 'Limited Release',
 };
 
 const getProductsByStatus = ($, productsNode) => {
@@ -11,6 +12,7 @@ const getProductsByStatus = ($, productsNode) => {
     [STATUS.SOLD_OUT]: [],
     [STATUS.NEW]: [],
     [STATUS.COMING_SOON]: [],
+    [STATUS.LIMITED]: [],
   };
   $(productsNode).each((i, element) => {
     const status = getStatus($, element);
@@ -22,6 +24,8 @@ const getProductsByStatus = ($, productsNode) => {
       products[STATUS.NEW].push(productName);
     } else if (status === STATUS.COMING_SOON) {
       products[STATUS.COMING_SOON].push(productName);
+    } else if (status === STATUS.LIMITED) {
+      products[STATUS.LIMITED].push(productName);
     } else {
       notif({ message: `There is a new status : ${status}` });
       throw new Error('er');
@@ -39,6 +43,8 @@ const getStatus = ($, liElement) => {
     .filter((item) => !!item);
 
   if (status && status.length === 1) {
+    return status[0];
+  } else if (status[0] === 'Limited Release') {
     return status[0];
   } else {
     throw new Error('something wrong with getStatus fn');

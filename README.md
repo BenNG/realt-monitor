@@ -1,0 +1,1 @@
+install mplayer & lirc
